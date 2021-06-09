@@ -21,4 +21,6 @@ router.put('/:id', upload, User.update);
 
 router.delete('/:id', User.destroy);
 
+router.put('/:id', User.upgrade);
+
 module.exports = router;

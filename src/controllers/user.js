@@ -72,3 +72,19 @@ exports.destroy = async function (req, res) {
         res.status(500).json({message: error.message});
     }
 };
+
+exports.upgrade = async function (req, res) {
+    try {
+        const id = req.params.id;
+        const user_ = await User.findById(id) 
+        if (!user_) 
+            return res.status(401).json({message: 'User does not exist'});
+        user_.role = 'enterprise'
+        await user_.save();
+
+        res.status(200).json({user: user_, message: 'Upgraded to Enteprise'});
+    }
+    catch (error) {
+        res.status(500).json({message: error.message});
+    }
+}
